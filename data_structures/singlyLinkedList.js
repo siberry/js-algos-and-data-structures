@@ -68,12 +68,12 @@ class SinglyLinkedList {
   remove(idx) {
     if (idx === this.length) return this.pop();
     if (idx === 0) return this.shift();
-    let removedNode = get(idx)
+    let removedNode = this.get(idx)
     if (removedNode) {
-      get(idx - 1).next = removedNode.next
+      this.get(idx - 1).next = removedNode.next
       this.length--
       removedNode.next === null
-      return removeNode;
+      return removedNode;
     }
     return false;
   }
@@ -136,6 +136,7 @@ console.log(list.push("Bukas!"));
 
 list.print()
 list.reverse()
+list.remove(2)
 list.print()
 console.log(list)
 // //
