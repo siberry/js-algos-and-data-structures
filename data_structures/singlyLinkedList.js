@@ -66,8 +66,6 @@ class SinglyLinkedList {
   }
 
   remove(idx) {
-    // justin -> serena -> <3 -> bukas
-    // justin -> <3 -> Bukas
     if (idx === this.length) return this.pop();
     if (idx === 0) return this.shift();
     let removedNode = get(idx)
@@ -106,7 +104,7 @@ class SinglyLinkedList {
 
   pop() {
     if (this.head === null) return;
-    if (!this.head.next) return this.emptyList();
+    if (this.length === 1) return this.emptyList();
     let current = this.head
     let newTail = current
     while(current.next) {
