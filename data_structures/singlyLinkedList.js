@@ -69,10 +69,10 @@ class SinglyLinkedList {
     if (idx === this.length) return this.pop();
     if (idx === 0) return this.shift();
     let removedNode = get(idx)
-    if (removeNode) {
-      get(idx - 1).next = removeNode.next
+    if (removedNode) {
+      get(idx - 1).next = removedNode.next
       this.length--
-      removeNode.next === null
+      removedNode.next === null
       return removeNode;
     }
     return false;
