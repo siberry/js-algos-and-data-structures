@@ -13,6 +13,20 @@ class DoublyLinkedList {
     this.length = 0
   }
 
+  reverse() {
+    [this.head,this.tail] = [this.tail,this.head]
+    let current = this.tail
+    let prev = null;
+    let next;
+    for (let i = 0; i < this.length; i++) {
+      next = current.next
+      current.next = prev;
+      prev = current
+      current = next
+    }
+    return this;
+  }
+
   remove(idx) {
     if (idx >= this.length) return false;
     if (idx === 0) return this.shift();
