@@ -21,18 +21,55 @@ class Graph { // undirected
     delete this.adjacencyList[vertex]
   }
 
-  dfsRecursive(startVert) {
+  dfsRecursive(startVert) { // goes from start of adjacencyList
     let results = []
     const visited = {}
     const dfs = (vert) => {
       if (!vert) return;
       visited[vert] = true
       results.push(vert)
-      this.adjacencyList[vert].forEach(adjVert => {
-        if (!visited[adjVert]) dfs(adjVert);
-      })
+      this.adjacencyList[vert].forEach(adjVert => {if (!visited[adjVert]) dfs(adjVert)})
     }
     dfs(startVert)
+    return results
+  }
+
+  dfsIterative(start) { // goes from end of adjacencyList b/c of stack LIFO logic
+    let results = []
+    let stack = [start]
+    const visited = {}
+    visited[start] = true
+    let vert
+    while (stack.length) {
+      vert = stack.pop()
+      results.push(vert)
+      this.adjacencyList[vert].forEach(adjVert => {
+        if (!visited[adjVert]) {
+          visited[adjVert] = true
+          stack.push(adjVert)
+        }
+      })
+    }
+    return results
+  }
+
+  bfs(start) {
+    let queue = [start]
+    let results = []
+    let visited = {}
+    visited[start] = true
+
+    let vert;
+    while (queue.length) {
+      vert = queue.shift()
+      results.push(vert)
+      this.adjacencyList[vert].forEach(adjVert => {
+        if (!visited[adjVert]) {
+          visited[adjVert] = true
+          queue.push(adjVert)
+        }
+      })
+    }
     return results
   }
 }
@@ -55,3 +92,5 @@ g.addEdge('D', 'F')
 g.addEdge('E', 'F')
 
 console.log(g.dfsRecursive('B'));
+console.log(g.dfsIterative('B'));
+console.log(g.bfs('A'));
