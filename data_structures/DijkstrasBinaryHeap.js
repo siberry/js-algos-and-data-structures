@@ -63,7 +63,7 @@ class WeightedGraph {
 
 class Node {
   constructor(value, priority) {
-    this.value = value;
+    this.val = value;
     this.priority = priority;
   }
 }
@@ -82,16 +82,22 @@ class PriorityQueue {
   }
 
   enqueue(val, priority) {
-    let newNode = new Node(val, priority)
-    if (!this.values.length) return this.values.push(newNode);
-    let idx = this.values.length
-    this.values.push(newNode)
-    let parentIdx = this.getParentIdx(idx)
-    while (priority < this.values[parentIdx].priority) {
-      this.swap(idx, parentIdx)
-      idx = parentIdx
-      parentIdx = this.getParentIdx(idx)
-    }
+    let newNode = new Node(val, priority);
+    this.values.push(newNode);
+    this.bubbleUp();
+  }
+
+  bubbleUp(){
+      let idx = this.values.length - 1;
+      const element = this.values[idx];
+      while(idx > 0){
+          let parentIdx = Math.floor((idx - 1)/2);
+          let parent = this.values[parentIdx];
+          if(element.priority >= parent.priority) break;
+          this.values[parentIdx] = element;
+          this.values[idx] = parent;
+          idx = parentIdx;
+      }
   }
 
   sinkDown() {
@@ -150,5 +156,4 @@ g.addEdge('D', 'E', 3)
 g.addEdge('D', 'F', 1)
 g.addEdge('E', 'F', 1)
 
-console.log(g);
 console.log(g.dijkstras('A', 'E'));
