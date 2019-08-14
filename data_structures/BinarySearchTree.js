@@ -69,8 +69,6 @@ class BinarySearchTree {
     return nodes
   }
 
-
-
   dfsPreOrder() {
     let nodes = []
     const traverse = (node) => {
@@ -81,15 +79,38 @@ class BinarySearchTree {
     traverse(this.root)
     return nodes
   }
+
+  dfsPostOrder() {
+    let nodes = []
+    const traverse = (node) => {
+      if (node.left) traverse(node.left)
+      if (node.right) traverse(node.right)
+      nodes.push(node.val)
+    }
+    traverse(this.root)
+    return nodes
+  }
+
+  dfsInOrder() { 
+    let nodes = []
+    const traverse = (node) => {
+      if (node.left) traverse(node.left)
+      nodes.push(node.val)
+      if (node.right) traverse(node.right)
+    }
+    traverse(this.root)
+    return nodes
+  }
 }
 
 let bst = new BinarySearchTree();
-console.log(bst.insert(5));
-console.log(bst.insert(4));
-console.log(bst.insert(3));
-console.log(bst.insert(9));
 console.log(bst.insert(10));
-console.log(bst.insert(7));
-console.log(bst.find(4));
-console.log(bst.find(2));
+console.log(bst.insert(6));
+console.log(bst.insert(15));
+console.log(bst.insert(3));
+console.log(bst.insert(8));
+console.log(bst.insert(20));
+// console.log(bst.insert(14));
+// console.log(bst.insert(1));
 console.log(bst.dfsPreOrder());
+console.log(bst.dfsInOrder());
