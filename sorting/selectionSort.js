@@ -1,5 +1,3 @@
-let swaps = 0
-
 function selectionSort(arr) {
   let isSorted;
   let place = 0;
@@ -15,13 +13,11 @@ function selectionSort(arr) {
     if (place !== min) swap(arr, place, min);
     place++
   }
-  console.log(swaps)
   return arr
 }
 
 const swap = (arr, i, j) => {
   [arr[i], arr[j]] = [arr[j], arr[i]]
-  swaps++
 }
 
 selectionSort([5,9,1,11,20,0])
